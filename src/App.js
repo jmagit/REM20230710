@@ -6,7 +6,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1>Adios mundo</h1>
+        <h1>Hola mundo</h1>
+        <h2>Secreto: {process.env.REACT_APP_SECRET} {process.env.REACT_APP_API_URL}</h2>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
