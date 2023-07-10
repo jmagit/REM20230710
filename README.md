@@ -15,7 +15,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)
 - [Jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest)
 
-
 ## Available Scripts
 
 In the project directory, you can run:
