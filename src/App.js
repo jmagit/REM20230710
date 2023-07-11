@@ -1,12 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import { DemosJSX } from './demosJSX';
+import { Demos } from './demos';
 
 function App() {
   return (
     <div className="container-fluid">
       <AppOld />
-      <DemosJSX />
+      <Demos />
     </div>
   );
 }
