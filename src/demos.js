@@ -76,20 +76,26 @@ export default class ContadorConClase extends Component {
         this.sube = () => this.cambia(this.delta)
         this.baja = this.baja.bind(this)
     }
-    cambia(variación) {
-        this.setState({contador: this.state.contador + variación})
+    cambia(variación, e) {
+        // this.setState({ contador: this.state.contador + variación })
+        this.setState(prev => ({ contador: prev.contador + variación }))
         console.log(this.state.contador)
+        // console.log(e)
     }
-    baja () {
-        this.cambia(-this.delta)
+    baja(e) {
+        this.cambia(-this.delta, e)
+        e.stopPropagation()
     }
     render() {
         return (
-            <div>
-            <Pantalla valor={this.state.contador} />
+            <div onClick={e => console.log('clic en', e.target)}>
+                <Pantalla valor={this.state.contador} />
                 <button type='button' onClick={this.baja} >-</button>
+                <button type='button' onClick={this.cambia.bind(this, -this.delta)} >--</button>
                 <button type='button' onClick={this.sube}>+</button>
-                <button type='button' onClick={() => this.setState({contador: 0})}>init</button>
+                <button type='button' onClick={() => this.setState({ contador: 0 })}>init</button>
+                <button type='button' onClick={() => this.delta++}>delta</button>
+                <Pantalla valor={this.delta} />
             </div>
         )
     }
