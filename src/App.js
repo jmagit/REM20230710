@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { DemosJSX } from './demos';
+import { DemosJSX } from './demosJSX';
 
 function App() {
   return (
