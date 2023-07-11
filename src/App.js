@@ -1,7 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
+import { DemosJSX } from './demos';
 
 function App() {
+  return (
+    <div className="container-fluid">
+      <AppOld />
+      <DemosJSX />
+    </div>
+  );
+}
+
+function AppOld() {
   return (
     <div className="App">
       <header className="App-header">
