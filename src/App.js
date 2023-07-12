@@ -6,7 +6,8 @@ import { Demos } from './demos';
 function App() {
   return (
     <div className="container-fluid">
-      <AppOld />
+      {/* <AppOld /> */}
+      <DemosJSX />
       <Demos />
     </div>
   );

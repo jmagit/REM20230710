@@ -1,12 +1,24 @@
 import React, { Component, useState } from 'react'
 
 export function Demos(props) {
+    const [cont, setCont] = useState(0)
+    const cambia = ev => {
+        if(ev.data <= 10) {
+            setCont(ev.data)
+        } else {
+            ev.cancel = true
+        }
+    }
     let nombre = "Don Jose";
     return (
         <>
-            <Contador init={5} />
+        <p>
+            <output style={{color: 'blue'}}>{cont}</output>
+
+        </p>
+            <Contador init={5} onCambia={cambia} />
             <ContadorConClase init={10} />
-            <Card titulo="Ejemplo componente">
+            <Card titulo="Ejemplo componente" cartelito='algo' onLeer={() => console.log('leer mas')}>
                 <Saluda nombre="Don Pepito" />
                 <Saluda nombre={nombre} />
                 <Despide nombre="Don Pepito" />
@@ -26,29 +38,33 @@ function Despide({ nombre }) {
     return <h1>Hola {nombre}</h1>
 }
 
-function Card({ titulo, children }) {
+function Card({ titulo, children, onLeer, cartelito='Leer mas' }) {
     return (
         <div className="card" style={{ width: "18rem" }}>
             <div className="card-body">
                 <h5 className="card-title">{titulo}</h5>
                 <div className="card-text">{children}</div>
+                <div className="card-text"><button type='button' onClick={() => onLeer && onLeer()} >{cartelito}</button></div>
             </div>
         </div>
     )
 }
 
-function Pantalla({ valor }) {
-    return <output>{valor}</output>
+function Pantalla({ valor, estilo, visible }) {
+    return <output style={estilo} hidden={visible}>{valor}</output>
 }
-function Contador({ init = 10, delta = 1 }) {
+function Contador({ init = 10, delta = 1, onCambia = () => {}}) {
     let [contador, setContador] = useState(+init)
     let [otro, setOtro] = useState(+init)
 
     const cambia = variación => {
+        const ev = { data: contador + variación, cancel: false}
+        if(onCambia) onCambia(ev)
+        if(ev.cancel) return
         // setContador(contador + variación)
         setContador(c => c + variación)
-        setContador(c => c + variación)
-        setOtro(c => c + variación)
+        // setContador(c => c + variación)
+        // setOtro(c => c + variación)
         // contador++
         // setContador(contador + variación)
         console.log(contador)
@@ -100,3 +116,4 @@ export default class ContadorConClase extends Component {
         )
     }
 }
+

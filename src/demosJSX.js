@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 function toUpper(value) {
     return value ? (value[0].toUpperCase() + value.substring(1).toLowerCase()) : value
 }
@@ -27,13 +29,14 @@ export function DemosJSX() {
         }
     }
     let eti = <span>Parrafo</span>
-    let valores = [150, 150, 200]
+    const [valores, setValores] = useState([150, 150, 200])
     let listado = [
         {id: 1, nombre: 'Madrid'},
         {id: 2, nombre: 'barcelona'},
         {id: 3, nombre: 'VALENCIA'},
         {id: 4, nombre: 'ciudad Real'},
     ]
+    listado[1] = {...listado[1], nombre: 'Barcelona'}
     let myStyle={color: 'white', backgroundColor: 'red'}
     let clase = 'urgente'
     if(width > 0){
@@ -41,6 +44,11 @@ export function DemosJSX() {
     }else{
         myStyle.fontSize = '12px'
         clase = 'error'
+    }
+    const modifica = () => {
+        valores.forEach((t, i) => valores[i] = t + 1 )
+        setValores([...valores])
+        // setValores([...valores, 100])
     }
     // if(!width)
     //     return [
@@ -60,11 +68,13 @@ export function DemosJSX() {
             <p style={{color: 'white', backgroundColor: 'red'}} dangerouslySetInnerHTML={{__html: height}} />
             {etiquetas(width > 0, 'valor')}
             {eti}
+            <input type='button' value="add" onClick={modifica} />
             <ul>{valores.filter(item => item < 200).map((item, index) => <li key={index}>{item}</li>)}</ul>
             <ul>{listado.map(item => <li key={item.id}>{toUpper(item.nombre)}</li>)}</ul>
             <select>{listado.map(item => <option key={item.id} value={item.id}>{toUpper(item.nombre)}</option>)}</select>        
             {JSON.stringify(tamaño)}
             {JSON.stringify({clase})}
+
         </>
     )
 }
