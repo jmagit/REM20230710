@@ -44,11 +44,11 @@ export function Calculadora(fnPantalla, fnResumen) {
 	ref.ponDigito = function (value) {
 		if (typeof (value) !== 'string')
 			value = value.toString();
-		if (value.length != 1 || value < '0' || value > '9') {
+		if (value.length !== 1 || value < '0' || value > '9') {
 			console.error('No es un valor numérico.');
 			return;
 		}
-		if (limpiar || miPantalla == '0') {
+		if (limpiar || miPantalla === '0') {
 			miPantalla = value;
 			limpiar = false;
 		} else
@@ -56,6 +56,7 @@ export function Calculadora(fnPantalla, fnResumen) {
 		pintaPantalla();
 	};
 	ref.ponOperando = function (value) {
+		// eslint-disable-next-line eqeqeq
 		if (!Number.isNaN(parseFloat(value)) && parseFloat(value) == value) {
 			miPantalla = value;
 			limpiar = false;
@@ -75,7 +76,7 @@ export function Calculadora(fnPantalla, fnResumen) {
 		pintaPantalla();
 	};
 	ref.borrar = function () {
-		if (limpiar || miPantalla.length == 1 || (miPantalla.length == 2 && miPantalla.startsWith('-'))) {
+		if (limpiar || miPantalla.length === 1 || (miPantalla.length === 2 && miPantalla.startsWith('-'))) {
 			miPantalla = '0';
 			limpiar = true;
 		} else
@@ -90,7 +91,7 @@ export function Calculadora(fnPantalla, fnResumen) {
 		pintaPantalla();
 	};
 	ref.calcula = function (value) {
-		if ('+-*/='.indexOf(value) == -1) {
+		if ('+-*/='.indexOf(value) === -1) {
 			console.error(`Operación no soportada: ${value}`);
 			return;
 		}
@@ -117,7 +118,7 @@ export function Calculadora(fnPantalla, fnResumen) {
 		// 9.9 + 1.3, 0.1 + 0.2, 1.0 - 0.9
 		miPantalla = parseFloat(acumulado.toPrecision(15)).toString();
 		// miPantalla = acumulado.toString();
-		miResumen = value == '=' ? '' : (`${miPantalla} ${value}`);
+		miResumen = value === '=' ? '' : (`${miPantalla} ${value}`);
 		pintaPantalla();
 		pintaResumen();
 		operador = value;

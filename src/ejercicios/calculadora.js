@@ -347,7 +347,7 @@ export function CalculadoraCompletaConFuncion(props) {
   }
 
   const borrar = () => {
-    if (limpiar.current || pantalla.length === 1) {
+    if (limpiar.current || pantalla.length === 1|| (pantalla.length === 2 && pantalla.startsWith('-'))) {
       setPantalla(p => '0')
       limpiar.current = true;
     } else {

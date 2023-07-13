@@ -1,6 +1,6 @@
 import { fireEvent, getByText, render, screen } from '@testing-library/react';
 import { unmountComponentAtNode } from "react-dom";
-import Calculadora from './calculadora'
+import {CalculadoraConFuncion as Calculadora} from './calculadora'
 
 describe('Pruebas del componente de la calculadora', () => {
     let container = null;

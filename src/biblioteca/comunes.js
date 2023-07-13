@@ -1,5 +1,5 @@
 import React from 'react';
-import imgAjaxLoading from '../imagenes/loading.gif'
+import loadingImage from '../media/loading.gif'
 
 export class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -27,8 +27,8 @@ export class ErrorBoundary extends React.Component {
 export function Esperando() {
     return <div>
         <div className="ajax-wait"></div>
-        <div className="loader"></div>
-        {/* <img className="ajax-wait" src={loadingImage} alt="Cargando ..." /> */}
+        {/* <div className="loader"></div> */}
+        <img className="ajax-wait" src={loadingImage} alt="Cargando ..." />
     </div>;
 }
 

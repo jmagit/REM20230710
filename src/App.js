@@ -7,11 +7,11 @@ import { CalculadoraConFuncion as Calculadora} from './ejercicios/calculadora';
 function App() {
   return (
     <div className="container-fluid">
-      <Calculadora />
-      <Calculadora init={666} coma />
+      {/* <Calculadora />
+      <Calculadora init={666} coma /> */}
       {/* <AppOld /> */}
-      {/* <DemosJSX />
-      <Demos /> */}
+      {/* <DemosJSX /> */}
+      <Demos />
     </div>
   );
 }
