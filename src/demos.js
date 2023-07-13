@@ -1,4 +1,6 @@
-import React, { Component, useEffect, useState } from 'react'
+import { render } from '@testing-library/react'
+import React, { Component, useEffect, useRef, useState } from 'react'
+import { Esperando } from './biblioteca/comunes'
 
 export function Demos(props) {
     const [cont, setCont] = useState(1)
@@ -25,16 +27,78 @@ export function Demos(props) {
                 <Despide nombre="Don Pepito" />
                 <Despide nombre={nombre} />
             </Card>
-            <button type='button' onClick={() => setVisible(!visible)} >{visible ? 'Ocultar' : 'Ver'}</button>
+            <p>
+                <button type='button' onClick={() => setVisible(!visible)} >{visible ? 'Ocultar' : 'Ver'}</button>
+            </p>
             {/* <Coordenadas /> */}
             {visible && <Reloj velocidad={cont} />}
+            {/* <VideoPlayer isPlaying={visible} src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" /> */}
+            <Listado />
         </>
     )
 }
+function Listado() {
+    const [loading, setLoading] = useState(true)
+    const [errorMsg, setErrorMsg] = useState('')
+    const [listado, setListado] = useState([])
+    const [pagina, setPagina] = useState(1)
 
+    useEffect(() => {
+        setLoading(true)
+        setErrorMsg('')
+        fetch(`https://picsum.photos/v2/list?page=${pagina}&limit=10`).then(
+            resp => {
+                if (resp.ok) {
+                    resp.json().then(data => setListado(data)).catch(err => setErrorMsg(`Error formato del body: ${err}`));
+                } else { // Error de petición
+                    console.error(`${resp.status} - ${resp.statusText}`);
+                    setErrorMsg(`${resp.status} - ${resp.statusText}`)
+                }
+                setLoading(false)
+            },
+            err => { // Error de cliente
+                setErrorMsg(err);
+                setLoading(false)
+            }
+        )
+    }, [pagina])
+
+    let paginas = [];
+    for (let i = 0; i < 10; paginas[i++] = i);
+
+    if (loading)
+        return <Esperando />
+    if (errorMsg)
+        return <div className='alert alert-danger'>{errorMsg}</div>
+    return (
+        <>
+            <div>
+                {paginas.map(i => <button key={i} type='button' onClick={() => setPagina(i)}>{i}</button>)}
+            </div>
+            <ul>
+                {listado.map(item => <li key={item.id}><a href={item.url}>{item.author} ({item.id})</a></li>)}
+            </ul>
+        </>
+    )
+
+}
+function VideoPlayer({ src, isPlaying }) {
+    const ref = useRef(null);
+
+    useEffect(() => {
+        if (isPlaying) {
+            ref.current.play();
+        } else {
+            ref.current.pause();
+        }
+    }, [isPlaying]);
+
+    return <video ref={ref} src={src} loop />;
+}
 export function Reloj(props) {
     const [hora, setHora] = useState((new Date()).toLocaleTimeString())
     useEffect(() => {
+        // fase Did
         console.log(`pongo interval ${props.velocidad}`)
         let timerId = setInterval(() => {
             let msg = (new Date()).toLocaleTimeString()
@@ -42,10 +106,23 @@ export function Reloj(props) {
             console.log(msg)
         }, props.velocidad * 500)
         return () => {
+            // fase unmount
             clearInterval(timerId)
             console.log('quito interval')
         }
     }, [props.velocidad])
+    // useEffect(() => {
+    //     console.log(`pongo interval ${props.velocidad}`)
+    //     let timerId = setInterval(() => {
+    //         let msg = (new Date()).toLocaleTimeString()
+    //         setHora(msg)
+    //         console.log(msg)
+    //     }, props.velocidad * 500)
+    //     return () => {
+    //         clearInterval(timerId)
+    //         console.log('quito interval')
+    //     }
+    // }, [props.velocidad])
     return <p>{hora}</p>
 }
 export class RelojConClase extends Component {
@@ -64,19 +141,23 @@ export class RelojConClase extends Component {
     }
 
     componentDidMount() {
+        // fase Did
         this.intervalo = setInterval(() => {
-            this.setState({hora: new Date()})
+            this.setState({ hora: new Date() })
         }, 1000)
     }
 
-    // componentDidUpdate() {
-    //     clearInterval(this.intervalo)
-    //     this.intervalo = setInterval(() => {
-    //         this.setState({hora: new Date()})
-    //     }, 1000)
-    // }
+    componentDidUpdate() {
+        // fase unmount
+        clearInterval(this.intervalo)
+        // fase Did
+        this.intervalo = setInterval(() => {
+            this.setState({ hora: new Date() })
+        }, 1000)
+    }
 
     componentWillUnmount() {
+        // fase unmount
         clearInterval(this.intervalo)
     }
 }
