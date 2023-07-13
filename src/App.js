@@ -10,11 +10,11 @@ import { useState } from 'react';
 
 function App() {
   const opcionesDelMenu = [
-    { texto: 'Muro', url: '/muro', componente: <Muro /> },
     { texto: 'Inicio', url: '/', componente: <AppOld /> },
     { texto: 'JSX', url: '/jsx', componente: <DemosJSX /> },
     { texto: 'Demos', url: '/demos', componente: <Demos /> },
     { texto: 'Calculadora', url: '/calc', componente: <Calculadora coma />, },
+    { texto: 'Muro', url: '/muro', componente: <Muro /> },
   ]
   const [seleccionado, setSeleccionado] = useState(0)
 

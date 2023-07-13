@@ -57,7 +57,7 @@ export default function Muro(props) {
         setRows(filas)
     }
     function mostrar(indice) {
-        listado[indice].visible = true;
+        listado[indice].visible = !listado[indice].visible;
         setListado([...listado])
     }
 
