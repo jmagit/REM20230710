@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import React, { Component, useEffect, useRef, useState } from 'react'
-import { Esperando } from './biblioteca/comunes'
+import { ErrorBoundary, Esperando } from './biblioteca/comunes'
 
 export function Demos(props) {
     const [cont, setCont] = useState(1)
@@ -33,7 +33,9 @@ export function Demos(props) {
             {/* <Coordenadas /> */}
             {visible && <Reloj velocidad={cont} />}
             {/* <VideoPlayer isPlaying={visible} src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" /> */}
+            <ErrorBoundary>
             <Listado />
+            </ErrorBoundary>
         </>
     )
 }
@@ -57,7 +59,8 @@ function Listado() {
                 setLoading(false)
             },
             err => { // Error de cliente
-                setErrorMsg(err);
+                setErrorMsg('Error de petición');
+                console.error(err)
                 setLoading(false)
             }
         )

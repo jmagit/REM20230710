@@ -3,15 +3,17 @@ import './App.css';
 import { DemosJSX } from './demosJSX';
 import { Demos } from './demos';
 import { CalculadoraConFuncion as Calculadora} from './ejercicios/calculadora';
+import { ErrorBoundary } from './biblioteca/comunes';
 
 function App() {
   return (
     <div className="container-fluid">
-      {/* <Calculadora />
-      <Calculadora init={666} coma /> */}
+      {/* <Calculadora /> */}
+      <Calculadora init={666} coma />
       {/* <AppOld /> */}
       {/* <DemosJSX /> */}
-      <Demos />
+      <ErrorBoundary><Demos /></ErrorBoundary>
+      
     </div>
   );
 }

@@ -6,9 +6,9 @@ export class ErrorBoundary extends React.Component {
         super(props);
         this.state = { hasError: false, error: null, errorInfo: null };
     }
-    static getDerivedStateFromError(error) {  // Actualiza el estado para que el siguiente renderizado lo muestre
-        return { hasError: true };
-    }
+    // static getDerivedStateFromError(error) {  // Actualiza el estado para que el siguiente renderizado lo muestre
+    //     return { hasError: true };
+    // }
     componentDidCatch(error, info) {  // También puedes registrar el error en un servicio de reporte de errores
         this.setState({ hasError: true, error: error, errorInfo: info })
     }
