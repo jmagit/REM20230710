@@ -7,9 +7,11 @@ import { CalculadoraConFuncion as Calculadora } from './ejercicios/calculadora';
 import { ErrorBoundary } from './biblioteca/comunes';
 import Muro from './ejercicios/muro';
 import { useState } from 'react';
+import Contactos from './formulario';
 
 function App() {
   const opcionesDelMenu = [
+    { texto: 'Contactos', url: '/contactos', componente: <Contactos /> },
     { texto: 'Inicio', url: '/', componente: <AppOld /> },
     { texto: 'JSX', url: '/jsx', componente: <DemosJSX /> },
     { texto: 'Demos', url: '/demos', componente: <Demos /> },
