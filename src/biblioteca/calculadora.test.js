@@ -18,6 +18,26 @@ describe('Pruebas aisladas de la calculadora', () => {
         onPantallaChange.mockClear()
         onResumenChange.mockClear()
     });
+    describe('kk', () => {
+        it('no hacer', () => {
+            function kk() {
+                return o.kk();
+            }
+            expect(() => kk()).toThrow()
+            // calc.inicia()
+            // calc.ponDigito(2)
+            // calc.calcula('+')
+            // calc.ponDigito(2)
+            // calc.calcula('=')
+            // expect(calc.pantalla).toBe('3')
+            // calc.inicia()
+            // calc.ponDigito(2)
+            // calc.calcula('-')
+            // calc.ponDigito(2)
+            // calc.calcula('=')
+            // expect(calc.pantalla).toBe('1')
+        })
+    });
 
     describe('Método: inicia', () => {
         it('Inicializa la calculadora', () => {

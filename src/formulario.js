@@ -90,13 +90,13 @@ function ContactosView({ elemento, onVolver }) {
 }
 function ContactosForm(props) {
     const [elemento, setElemento] = useState(props.elemento)
-    let [invalid, setInvalid] = useState(false)
-    let [errorsMsg, setErrorsMsg] = useState({})
+    const [invalid, setInvalid] = useState(false)
+    const [errorsMsg, setErrorsMsg] = useState({})
     const form = useRef(null)
 
     useEffect(() => {
-        invalid = false
-        errorsMsg = {}
+        let invalid = false
+        let errorsMsg = {}
         for(let cntr of form.current.elements) {
             // eslint-disable-next-line default-case
             switch(cntr.name) {

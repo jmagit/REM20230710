@@ -11,12 +11,12 @@ import Contactos from './formulario';
 
 function App() {
   const opcionesDelMenu = [
-    { texto: 'Contactos', url: '/contactos', componente: <Contactos /> },
     { texto: 'Inicio', url: '/', componente: <AppOld /> },
     { texto: 'JSX', url: '/jsx', componente: <DemosJSX /> },
     { texto: 'Demos', url: '/demos', componente: <Demos /> },
     { texto: 'Calculadora', url: '/calc', componente: <Calculadora coma />, },
     { texto: 'Muro', url: '/muro', componente: <Muro /> },
+    { texto: 'Contactos', url: '/contactos', componente: <Contactos /> },
   ]
   const [seleccionado, setSeleccionado] = useState(0)
 
